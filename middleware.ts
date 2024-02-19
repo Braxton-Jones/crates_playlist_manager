@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
     if (request.nextUrl.pathname === '/login') {
         const state = generateRandomString(16)
         const scope =
-            'user-read-private user-read-email user-top-read playlist-modify-public playlist-modify-private playlist-read-private user-read-playback-state user-modify-playback-state'
+            'user-read-private user-read-email user-top-read playlist-modify-public playlist-modify-private playlist-read-private user-read-playback-state user-modify-playback-state user-library-read'
         return NextResponse.redirect(
             `https://accounts.spotify.com/authorize?response_type=code&client_id=${process.env.SPOTIFY_CLIENT_ID}&scope=${scope}&redirect_uri=${process.env.SPOTIFY_REDIRECT_URI}&state=${state}`
         )

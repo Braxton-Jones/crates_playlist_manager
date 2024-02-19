@@ -1,4 +1,5 @@
 import PlaylistSelector from '@/components/playlist-selector'
+import { Suspense } from 'react'
 
 export default function DashboardLayout({
     children,
@@ -17,7 +18,7 @@ export default function DashboardLayout({
                     <PlaylistSelector />
                 </div>
                 <div className="col-span-9 col-start-5 row-span-6 row-start-1">
-                    <section>{children}</section>
+                    <Suspense>{children}</Suspense>
                 </div>
             </section>
         </main>

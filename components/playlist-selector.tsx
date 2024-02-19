@@ -1,6 +1,8 @@
 import redisClient from '@/lib/redis'
 import Image from 'next/image'
 import { decodeHTMLEntities } from '@/lib/utils'
+import { useRouter } from 'next/router'
+import PlaylistList from './playlist-list'
 
 async function getPlaylists(access_token: string) {
     try {
@@ -54,33 +56,7 @@ export default async function PlaylistSelector() {
 
     return (
         <section className="playlist-selector flex h-full flex-col gap-3 overflow-y-scroll rounded-lg bg-playlistBackground p-5">
-            {playlists &&
-                playlists.items.map((playlist: any) => {
-                    return (
-                        <div className="flex items-center gap-2 rounded-md bg-playlistForeground hover:cursor-pointer hover:brightness-75">
-                            <div
-                                style={{
-                                    backgroundImage: `url(${playlist.images[0].url})`,
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center',
-                                    minWidth: '55px',
-                                    minHeight: '55px',
-                                    borderRadius: '10%',
-                                }}
-                            />
-                            <div>
-                                <h3>{playlist.name}</h3>
-                                <p className="playlist-body text-xs">
-                                    {playlist.description
-                                        ? decodeHTMLEntities(
-                                              playlist.description
-                                          )
-                                        : 'no description available for this playlist'}
-                                </p>
-                            </div>
-                        </div>
-                    )
-                })}
+            {playlists && <PlaylistList playlists={playlists.items} />}
         </section>
     )
 }
